@@ -11,7 +11,6 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.IgnoreGuiInset = true
 ScreenGui.Parent = PlayerGui
 
-
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Size = UDim2.new(0, 260, 0, 225)
@@ -63,7 +62,7 @@ ListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 ListLayout.Parent = MainFrame
 
 local UIPadding = Instance.new("UIPadding")
-UIPadding.PaddingTop = UDim.new(0, 15) -- Set to 45 to clear the TopBar
+UIPadding.PaddingTop = UDim.new(0, 15)
 UIPadding.PaddingLeft = UDim.new(0, 15)
 UIPadding.PaddingRight = UDim.new(0, 15)
 UIPadding.Parent = MainFrame
@@ -146,7 +145,6 @@ PopupStroke.Color = Color3.fromRGB(142, 68, 173)
 PopupStroke.Thickness = 1.5
 PopupStroke.Parent = PopupFrame
 
--- NEW: Popup Layout and Padding
 local PopupListLayout = Instance.new("UIListLayout")
 PopupListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 PopupListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
@@ -168,36 +166,36 @@ PopupTitle.Font = Enum.Font.GothamBold
 PopupTitle.TextSize = 13
 PopupTitle.Parent = PopupFrame
 
-local PopupName = Instance.new("TextLabel")
-PopupName.Name = "PopupName"
-PopupName.Size = UDim2.new(1, 0, 0, 20)
-PopupName.BackgroundTransparency = 1
-PopupName.Text = "@Tartbear"
-PopupName.TextColor3 = Color3.fromRGB(240, 240, 255)
-PopupName.Font = Enum.Font.GothamBold
-PopupName.TextSize = 15
-PopupName.Parent = PopupFrame
+-- FIX: Gave unique variable names to popup items so all elements fade correctly
+local Contributor1 = Instance.new("TextLabel")
+Contributor1.Name = "PopupName"
+Contributor1.Size = UDim2.new(1, 0, 0, 20)
+Contributor1.BackgroundTransparency = 1
+Contributor1.Text = "@Tartbear"
+Contributor1.TextColor3 = Color3.fromRGB(240, 240, 255)
+Contributor1.Font = Enum.Font.GothamBold
+Contributor1.TextSize = 15
+Contributor1.Parent = PopupFrame
 
-local PopupName = Instance.new("TextLabel")
-PopupName.Name = "PopupName"
-PopupName.Size = UDim2.new(1, 0, 0, 20)
-PopupName.BackgroundTransparency = 1
-PopupName.Text = "@! Jager Shakur"
-PopupName.TextColor3 = Color3.fromRGB(240, 240, 255)
-PopupName.Font = Enum.Font.GothamBold
-PopupName.TextSize = 15
-PopupName.Parent = PopupFrame
+local Contributor2 = Instance.new("TextLabel")
+Contributor2.Name = "PopupName"
+Contributor2.Size = UDim2.new(1, 0, 0, 20)
+Contributor2.BackgroundTransparency = 1
+Contributor2.Text = "@! Jager Shakur"
+Contributor2.TextColor3 = Color3.fromRGB(240, 240, 255)
+Contributor2.Font = Enum.Font.GothamBold
+Contributor2.TextSize = 15
+Contributor2.Parent = PopupFrame
 
-local PopupName = Instance.new("TextLabel")
-PopupName.Name = "PopupName"
-PopupName.Size = UDim2.new(1, 0, 0, 20)
-PopupName.BackgroundTransparency = 1
-PopupName.Text = "@Rya"
-PopupName.TextColor3 = Color3.fromRGB(240, 240, 255)
-PopupName.Font = Enum.Font.GothamBold
-PopupName.TextSize = 15
-PopupName.Parent = PopupFrame
-
+local Contributor3 = Instance.new("TextLabel")
+Contributor3.Name = "PopupName"
+Contributor3.Size = UDim2.new(1, 0, 0, 20)
+Contributor3.BackgroundTransparency = 1
+Contributor3.Text = "@Rya"
+Contributor3.TextColor3 = Color3.fromRGB(240, 240, 255)
+Contributor3.Font = Enum.Font.GothamBold
+Contributor3.TextSize = 15
+Contributor3.Parent = PopupFrame
 
 local function UpdatePopupPosition()
     PopupFrame.Position = UDim2.new(
@@ -221,16 +219,22 @@ PlusButton.MouseButton1Click:Connect(function()
         PopupFrame.Size = UDim2.new(0, 200, 0, 0)
         PopupFrame.BackgroundTransparency = 1
         PopupTitle.TextTransparency = 1
-        PopupName.TextTransparency = 1
+        Contributor1.TextTransparency = 1
+        Contributor2.TextTransparency = 1
+        Contributor3.TextTransparency = 1
         
-        TweenService:Create(PopupFrame, tweenInfo, {Size = UDim2.new(0, 200, 0, 80), BackgroundTransparency = 0}):Play()
+        TweenService:Create(PopupFrame, tweenInfo, {Size = UDim2.new(0, 200, 0, 100), BackgroundTransparency = 0}):Play()
         TweenService:Create(PopupTitle, tweenInfo, {TextTransparency = 0}):Play()
-        TweenService:Create(PopupName, tweenInfo, {TextTransparency = 0}):Play()
+        TweenService:Create(Contributor1, tweenInfo, {TextTransparency = 0}):Play()
+        TweenService:Create(Contributor2, tweenInfo, {TextTransparency = 0}):Play()
+        TweenService:Create(Contributor3, tweenInfo, {TextTransparency = 0}):Play()
         PlusButton.Text = "×" 
     else
         local closeTween = TweenService:Create(PopupFrame, closeTweenInfo, {Size = UDim2.new(0, 200, 0, 0), BackgroundTransparency = 1})
         TweenService:Create(PopupTitle, closeTweenInfo, {TextTransparency = 1}):Play()
-        TweenService:Create(PopupName, closeTweenInfo, {TextTransparency = 1}):Play()
+        TweenService:Create(Contributor1, closeTweenInfo, {TextTransparency = 1}):Play()
+        TweenService:Create(Contributor2, closeTweenInfo, {TextTransparency = 1}):Play()
+        TweenService:Create(Contributor3, closeTweenInfo, {TextTransparency = 1}):Play()
         
         closeTween:Play()
         closeTween.Completed:Connect(function()
@@ -341,13 +345,12 @@ RunService.Heartbeat:Connect(function()
             local parsedGems = 0
             local parsedXP = 0
             
+            -- FIX: Standardized the Gem text extraction with ExtractNumber
             if gemLabelObj then
-             local text = gemLabelObj.Text:lower()
-               if text:find("gems") or text:find("gem") then
-         
-                 local numberStr = gemLabelObj.Text:match("^%s*(%d+)")
-                  parsedGems = numberStr and tonumber(numberStr) or 0
-                 end
+                local text = gemLabelObj.Text:lower()
+                if text:find("gems") or text:find("gem") then
+                    parsedGems = ExtractNumber(gemLabelObj.Text)
+                end
             end
             
             if xpLabelObj then
